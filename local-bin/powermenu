@@ -1,0 +1,21 @@
+#!/bin/bash
+
+choice=$(printf " Lock\n Logout\n Reboot\n Shutdown\n⏾ Suspend" | rofi -dmenu -p "Power")
+
+case "$choice" in
+    " Lock")
+        /home/parth/.local/bin/smart-lock
+        ;;
+    " Logout")
+        hyprctl dispatch exit
+        ;;
+    " Reboot")
+        systemctl reboot
+        ;;
+    " Shutdown")
+        systemctl poweroff
+        ;;
+    "⏾ Suspend")
+        systemctl suspend
+        ;;
+esac

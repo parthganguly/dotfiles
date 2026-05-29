@@ -1,0 +1,13 @@
+#!/bin/bash
+
+TEMP=$(sensors 2>/dev/null | awk '
+/Tctl:/ {gsub(/[+°C]/,"",$2); print int($2); exit}
+/Package id 0:/ {gsub(/[+°C]/,"",$4); print int($4); exit}
+/CPU:/ {gsub(/[+°C]/,"",$2); print int($2); exit}
+')
+
+if [ -z "$TEMP" ]; then
+    TEMP=$(cat /sys/class/thermal/thermal_zone*/temp 2>/dev/null | head -n 1 | awk '{print int($1/1000)}')
+fi
+
+echo "${TEMP:-0}"

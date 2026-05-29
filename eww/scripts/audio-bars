@@ -1,0 +1,38 @@
+#!/bin/bash
+
+VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
+
+if [ -z "$VOL" ] || [ "$VOL" -eq 0 ]; then
+    echo "▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁"
+    exit 0
+fi
+
+# Detect whether any PipeWire audio stream is actively linked
+ACTIVE=$(pw-link -l 2>/dev/null | grep -Ei "output|playback|monitor" | wc -l)
+
+if [ "$ACTIVE" -lt 2 ]; then
+    echo "▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁"
+    exit 0
+fi
+
+LEVEL=$((VOL / 10))
+
+BARS=""
+for i in $(seq 1 12); do
+    RAND=$((RANDOM % 10))
+
+    if [ "$RAND" -lt "$LEVEL" ]; then
+        HEIGHT=$((RANDOM % 5))
+        case "$HEIGHT" in
+            0) BARS="${BARS}▂ " ;;
+            1) BARS="${BARS}▃ " ;;
+            2) BARS="${BARS}▅ " ;;
+            3) BARS="${BARS}▆ " ;;
+            4) BARS="${BARS}█ " ;;
+        esac
+    else
+        BARS="${BARS}▁ "
+    fi
+done
+
+echo "$BARS"

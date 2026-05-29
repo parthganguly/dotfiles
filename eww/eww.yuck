@@ -1,0 +1,59 @@
+(defpoll volume :interval "1s" "~/.config/eww/scripts/volume")
+(defpoll audio_bars :interval "400ms" "~/.config/eww/scripts/audio-bars")
+(defpoll brightness :interval "2s" "~/.config/eww/scripts/brightness")
+(defpoll weather :interval "20m" "~/.config/eww/scripts/weather")
+(defpoll coretemp :interval "3s" "~/.config/eww/scripts/coretemp")
+
+(defwindow witcher
+  :monitor 0
+  :geometry (geometry
+    :x "560px"
+    :y "28px"
+    :width "320px"
+    :height "470px"
+    :anchor "top left")
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (witcher-panel))
+
+(defwidget meter [title value suffix]
+  (box :class "meter" :orientation "v"
+    (box :class "meter-head" :orientation "h" :space-evenly false
+      (label :class "meter-title" :text title :hexpand true :halign "start")
+      (label :class "meter-value" :text "${value}${suffix}" :hexpand true :halign "end"))
+    (progress :class "meter-bar" :value value :orientation "h")))
+
+(defwidget info-audio []
+  (box :class "info-box" :orientation "v"
+    (label :class "info-title" :text "Audio")
+    (label :class "audio-bars" :text audio_bars)
+    (label :class "info-sub" :text "Volume")
+    (progress :class "mini-bar" :value volume :orientation "h")))
+
+(defwidget info-weather []
+  (box :class "info-box" :orientation "v"
+    (label :class "info-title" :text "Weather")
+    (label :class "info-main" :text weather)
+    (label :class "info-sub" :text "Brightness ${brightness}%")
+    (progress :class "mini-bar" :value brightness :orientation "h")))
+
+(defwidget witcher-panel []
+  (box :class "panel" :orientation "v" :space-evenly false
+
+    (box :class "sigil-box" :orientation "v"
+      (label :class "sigil" :text "ᛉ   ᚹ   ᛟ")
+
+    (box :class "time-card" :orientation "v"
+      (label :class "time" :text {formattime(EWW_TIME, "%H:%M")})
+      (label :class "date" :text {formattime(EWW_TIME, "%A  %d %B")}))
+
+    (box :class "section" :orientation "v"
+      (meter :title "CPU" :value {round(EWW_CPU.avg, 0)} :suffix "%")
+      (meter :title "RAM" :value {round(EWW_RAM.used_mem_perc, 0)} :suffix "%")
+      (meter :title "Battery" :value {EWW_BATTERY.BAT0.capacity} :suffix "%")
+      (meter :title "Temp" :value coretemp :suffix "°C"))
+
+    (box :class "bottom-row" :orientation "h"
+      (info-audio)
+      (info-weather))

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: speak-file path/to/file.txt"
+  exit 1
+fi
+
+speak "$(cat "$1")"

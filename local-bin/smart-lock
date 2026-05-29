@@ -1,0 +1,14 @@
+#!/bin/bash
+
+HOUR=$(date +%H)
+
+# Morning/day: 6 AM to 8:59 PM = brain wallpaper
+# Late night: 5 PM to 5:59 AM = lock wallpaper
+
+if [ "$HOUR" -ge 6 ] && [ "$HOUR" -lt 17 ]; then
+    ln -sf /home/parth/Pictures/Wallpapers/brain.jpg /home/parth/Pictures/Wallpapers/current-lock
+else
+    ln -sf /home/parth/Pictures/Wallpapers/lock.png /home/parth/Pictures/Wallpapers/current-lock
+fi
+
+hyprlock

@@ -1,0 +1,84 @@
+*
+ {
+  font-family: "Inter", "Noto Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(8, 10, 12, 0.18);
+  color: #E6E6E6;
+  border-bottom: 1px solid rgba(230, 230, 230, 0.10);
+}
+
+#workspaces {
+  padding: 0 4px;
+  margin: 3px 6px;
+  background: rgba(8, 10, 12, 0.22);
+  border: 1px solid rgba(230, 230, 230, 0.08);
+  border-radius: 8px;
+}
+
+#workspaces button {
+  padding: 0 9px;
+  margin: 2px;
+  color: #A8ADB3;
+  background: transparent;
+  border-radius: 7px;
+}
+
+#workspaces button.active {
+  color: #FFFFFF;
+  background: rgba(180, 188, 196, 0.18);
+  border: 1px solid rgba(230, 230, 230, 0.14);
+}
+
+#workspaces button:hover {
+  color: #FFFFFF;
+  background: rgba(230, 230, 230, 0.10);
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#cpu,
+#memory,
+#temperature,
+#tray {
+  padding: 0 10px;
+  margin: 3px 4px;
+  color: #E6E6E6;
+  background: rgba(8, 10, 12, 0.32);
+  border: 1px solid rgba(230, 230, 230, 0.08);
+  border-radius: 8px;
+}
+
+#battery.charging {
+  color: #DDE8E8;
+}
+
+#battery.warning:not(.charging) {
+  color: #E6CDD2;
+  background: rgba(70, 22, 28, 0.42);
+}
+
+#battery.critical:not(.charging) {
+  color: #FFFFFF;
+  background: rgba(110, 28, 34, 0.65);
+}
+
+#temperature.critical {
+  color: #FFFFFF;
+  background: rgba(110, 28, 34, 0.65);
+}
+
+tooltip {
+  background: rgba(8, 10, 12, 0.90);
+  color: #E6E6E6;
+  border: 1px solid rgba(230, 230, 230, 0.14);
+  border-radius: 8px;
+}
