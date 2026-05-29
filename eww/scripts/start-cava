@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pkill -f "cava -p /home/parth/.config/cava/eww.conf"
+
+rm -f /tmp/eww-cava
+mkfifo /tmp/eww-cava
+
+cava -p /home/parth/.config/cava/eww.conf > /dev/null 2>&1 &

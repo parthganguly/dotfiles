@@ -1,38 +1,33 @@
 #!/bin/bash
 
-VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
-
-if [ -z "$VOL" ] || [ "$VOL" -eq 0 ]; then
+if [ ! -p /tmp/eww-cava ]; then
     echo "▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁"
     exit 0
 fi
 
-# Detect whether any PipeWire audio stream is actively linked
-ACTIVE=$(pw-link -l 2>/dev/null | grep -Ei "output|playback|monitor" | wc -l)
+RAW=$(timeout 0.08s dd bs=1 count=12 if=/tmp/eww-cava 2>/dev/null)
 
-if [ "$ACTIVE" -lt 2 ]; then
+if [ -z "$RAW" ]; then
     echo "▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁ ▁"
     exit 0
 fi
 
-LEVEL=$((VOL / 10))
+OUT=""
 
-BARS=""
-for i in $(seq 1 12); do
-    RAND=$((RANDOM % 10))
+for (( i=0; i<${#RAW}; i++ )); do
+    C="${RAW:$i:1}"
 
-    if [ "$RAND" -lt "$LEVEL" ]; then
-        HEIGHT=$((RANDOM % 5))
-        case "$HEIGHT" in
-            0) BARS="${BARS}▂ " ;;
-            1) BARS="${BARS}▃ " ;;
-            2) BARS="${BARS}▅ " ;;
-            3) BARS="${BARS}▆ " ;;
-            4) BARS="${BARS}█ " ;;
-        esac
-    else
-        BARS="${BARS}▁ "
-    fi
+    case "$C" in
+        0) OUT="${OUT}▁ " ;;
+        1) OUT="${OUT}▂ " ;;
+        2) OUT="${OUT}▃ " ;;
+        3) OUT="${OUT}▄ " ;;
+        4) OUT="${OUT}▅ " ;;
+        5) OUT="${OUT}▆ " ;;
+        6) OUT="${OUT}▇ " ;;
+        7) OUT="${OUT}█ " ;;
+        *) OUT="${OUT}▁ " ;;
+    esac
 done
 
-echo "$BARS"
+echo "$OUT"	
