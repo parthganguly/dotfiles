@@ -8,7 +8,7 @@
   :monitor 0
   :geometry (geometry
     :x "560px"
-    :y "28px"
+    :y "38px"
     :width "320px"
     :height "470px"
     :anchor "top left")
@@ -43,6 +43,7 @@
 
     (box :class "sigil-box" :orientation "v"
       (label :class "sigil" :text "ᛉ   ᚹ   ᛟ")
+      (label :class "status" :text "WOLF STATUS // ACTIVE"))
 
     (box :class "time-card" :orientation "v"
       (label :class "time" :text {formattime(EWW_TIME, "%H:%M")})
@@ -52,8 +53,10 @@
       (meter :title "CPU" :value {round(EWW_CPU.avg, 0)} :suffix "%")
       (meter :title "RAM" :value {round(EWW_RAM.used_mem_perc, 0)} :suffix "%")
       (meter :title "Battery" :value {EWW_BATTERY.BAT0.capacity} :suffix "%")
-      (meter :title "Temp" :value coretemp :suffix "°C"))
+      (meter :title "Core Temp" :value coretemp :suffix "°C"))
 
     (box :class "bottom-row" :orientation "h"
       (info-audio)
       (info-weather))
+
+    (label :class "quote" :text "\"Wind's howling.\"")))
