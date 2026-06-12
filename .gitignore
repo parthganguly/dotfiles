@@ -1,0 +1,19 @@
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Local secrets and machine state.
+gh/hosts.yml
+rclone/rclone.conf
+**/Cookies
+**/Cookies-journal
+**/Trust Tokens
+**/Trust Tokens-journal
+**/Local State
+**/*.log
+
+# Runtime output.
+*.pid
+*.sock
+*.cache
