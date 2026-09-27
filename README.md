@@ -57,5 +57,7 @@ The Waybar audio controls use `zenity` for the volume slider, `libpulse` for
 ## Notes
 
 - `scripts/mount-gdrive.sh` expects an rclone remote named `gdrive`.
-- `hypr/hyprland.conf` references `~/Pictures/Wallpapers/witcher-mac.png`.
+- `hypr/hyprland.lua` is the active Hyprland config on version 0.55+; the
+  previous `hyprland.conf` is retained as a fallback.
+- `hypr/hyprland.lua` references `~/Pictures/Wallpapers/witcher-mac.png`.
 - Secrets and session files are intentionally excluded.
