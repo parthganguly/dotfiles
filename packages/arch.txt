@@ -7,7 +7,6 @@ brightnessctl
 cava
 cliphist
 dunst
-eww
 ghostty
 git
 grim
@@ -17,6 +16,7 @@ hypridle
 hyprland
 hyprlock
 hyprpaper
+libpulse
 mpv
 network-manager-applet
 papirus-icon-theme
@@ -32,4 +32,5 @@ waybar
 wireplumber
 wl-clipboard
 xfce4-settings
+zenity
 zoxide

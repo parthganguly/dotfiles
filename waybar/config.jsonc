@@ -6,7 +6,7 @@
 
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["tray", "network", "cpu", "memory", "temperature", "battery"],
+  "modules-right": ["tray", "pulseaudio", "network", "cpu", "memory", "temperature", "battery"],
 
   "hyprland/workspaces": {
     "format": "{id}"
@@ -26,6 +26,18 @@
     "format-wifi": "{essid} ({signalStrength}%)",
     "format-ethernet": "ethernet",
     "format-disconnected": "offline"
+  },
+
+  "pulseaudio": {
+    "format": "VOL {volume}%",
+    "format-muted": "MUTED",
+    "format-bluetooth": "BT {volume}%",
+    "tooltip-format": "{desc}\nClick: volume slider · Middle-click: output\nRight-click: mute · Scroll: volume",
+    "scroll-step": 5,
+    "max-volume": 150,
+    "on-click": "~/.config/waybar/volume-slider.sh",
+    "on-click-middle": "~/.config/waybar/audio-output-menu.sh",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
 
   "cpu": {

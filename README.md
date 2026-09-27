@@ -38,14 +38,21 @@ The installer backs up existing files before creating symlinks.
 
 ## Packages
 
-`packages/arch.txt` lists the packages these configs expect on an Arch-based
-system. Install it with:
+`packages/arch.txt` lists the official Arch packages these configs expect.
+Install them with:
 
 ```bash
 sudo pacman -S --needed - < packages/arch.txt
 ```
 
-Some entries may come from the AUR depending on the machine.
+The Eww widget system is installed separately from the AUR:
+
+```bash
+yay -S --needed eww
+```
+
+The Waybar audio controls use `zenity` for the volume slider, `libpulse` for
+`pactl`, and `wireplumber` for `wpctl`.
 
 ## Notes
 
